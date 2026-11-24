@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { BASE_URL } from '../api/client'
 
 /**
  * Ultra-low latency WebSocket hook for real-time live scoring and TV scoreboard display.
@@ -34,7 +35,7 @@ export function useGameWebSocket(gameKey, onGameUpdate) {
     let attempt = 0
 
     const buildWsUrl = () => {
-      const apiBase = import.meta.env.VITE_API_BASE_URL || '/api/v1'
+      const apiBase = BASE_URL
       if (/^https?:\/\//i.test(apiBase)) {
         const parsed = new URL(apiBase)
         const wsProtocol = parsed.protocol === 'https:' ? 'wss:' : 'ws:'

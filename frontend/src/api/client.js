@@ -1,6 +1,16 @@
 import axios from 'axios'
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api/v1'
+export function normalizeApiUrl(raw) {
+  if (!raw || raw === '/') return '/api/v1'
+  const trimmed = raw.replace(/\/+$/, '')
+  if (trimmed.endsWith('/api/v1')) return trimmed
+  if (/^https?:\/\//i.test(trimmed)) {
+    return `${trimmed}/api/v1`
+  }
+  return trimmed.startsWith('/') ? `${trimmed}/api/v1` : `/${trimmed}/api/v1`
+}
+
+export const BASE_URL = normalizeApiUrl(import.meta.env.VITE_API_BASE_URL)
 
 const STORAGE_KEYS = {
   ACCESS: 'rallyos_access_token',
