@@ -1,0 +1,2 @@
+"""RallyOS FastAPI backend package."""
+

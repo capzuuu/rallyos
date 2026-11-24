@@ -1,0 +1,10 @@
+[project]
+name = "rallyos-backend"
+version = "1.0.0"
+description = "RallyOS FastAPI + MySQL backend"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+

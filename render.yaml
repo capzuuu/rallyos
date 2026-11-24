@@ -1,0 +1,24 @@
+services:
+  # RallyOS FastAPI Real-Time Backend Web Service
+  - type: web
+    name: rallyos-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: singapore # Close to Supabase ap-south-1 for lowest database latency
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_NAME
+        value: "RallyOS API"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false # Set in Render Dashboard: postgresql://postgres:Joemarcapitle110103@db.qaocdecturwknyrbisse.supabase.co:5432/postgres
+      - key: CORS_ORIGINS
+        sync: false # Set in Render Dashboard: https://your-app.vercel.app,http://localhost:5173
+      - key: CORS_ORIGIN_REGEX
+        value: "^https?://(localhost|127\\.0\\.0\\.1|\\[::1\\]|(?:\\d{1,3}\\.){3}\\d{1,3}|.*\\.vercel\\.app)(:\\d+)?$"
